@@ -1,57 +1,85 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { PSChroma, PSChromaEffect } from './ps.chroma';
+import { ChromaApp } from './chroma-js/ChromaApp';
+import DeviceContainer, { AvailableDevices } from './chroma-js/Devices';
+import { AppCategory } from './chroma-js/AppInfo';
+import { ChromaInstance } from './chroma-js/ChromaInstance';
+import { Animation } from './chroma-js/Animation';
+import { WaveAnimation } from './chroma-js/Animations/WaveAnimation';
+import Color from './chroma-js/Color';
+import Keyboard from './chroma-js/Devices/Keyboard';
+import { BcaAnimation } from './chroma-js/Animations/BcaAnimation';
+import { VSCAnimationData, VSCAnimDataDebugStatus, VSCAnimation } from './chroma-js/Animations/VSCAnimation';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "vschroma" is now active!');
+	var chroma: ChromaApp = new ChromaApp(
+		'VSChroma',
+		'Visual Studio Code Plugin for Razer Chroma',
+		'Tomasz Pastez Kwolek',
+		'pastezzz@gmail.com',
+		[AvailableDevices.Keyboard],
+		AppCategory.Application
+	);
 
-	var chroma: PSChroma | undefined;
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		if (!chroma) {
-			chroma = new PSChroma();
-		}
-		chroma.init((chroma, uri) => {
-			vscode.window.showInformationMessage(`Chroma connected ${uri}`);
-			// chroma.clearAll();
-			chroma.createKeyboardEffect(PSChromaEffect.CHROMA_CUSTOM_KEY, {
-				color: [
-					[255, 255, 255, 255, 255, 65280, 65280, 65280, 65280, 65280, 16711680, 16711680, 16711680, 16711680, 16711680, 16776960, 16776960, 16776960, 65535, 65535, 65535, 65535, 65535, 65535],
-					[255, 255, 255, 255, 255, 65280, 65280, 65280, 65280, 65280, 16711680, 16711680, 16711680, 16711680, 16711680, 16776960, 16776960, 16776960, 65535, 65535, 65535, 65535, 65535, 65535],
-					[255, 255, 255, 255, 255, 65280, 65280, 65280, 65280, 65280, 16711680, 16711680, 16711680, 16711680, 16711680, 16776960, 16776960, 16776960, 65535, 65535, 65535, 65535, 65535, 65535],
-					[255, 255, 255, 255, 255, 65280, 65280, 65280, 65280, 65280, 16711680, 16711680, 16711680, 16711680, 16711680, 16776960, 16776960, 16776960, 65535, 65535, 65535, 65535, 65535, 65535],
-					[255, 255, 255, 255, 255, 65280, 65280, 65280, 65280, 65280, 16711680, 16711680, 16711680, 16711680, 16711680, 16776960, 16776960, 16776960, 65535, 65535, 65535, 65535, 65535, 65535],
-					[255, 255, 255, 255, 255, 65280, 65280, 65280, 65280, 65280, 16711680, 16711680, 16711680, 16711680, 16711680, 16776960, 16776960, 16776960, 65535, 65535, 65535, 65535, 65535, 65535]
-				],
-				key: [
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 0, 0, (16777216 | ~255), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 0, (16777216 | ~255), (16777216 | ~255), (16777216 | ~255), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (16777216 | ~16776960), 0, 0, 0, 0, 0],
-					[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (16777216 | ~16776960), (16777216 | ~16776960), (16777216 | ~16776960), 0, 0, 0, 0]
-				]
-			}, (res, id) => {
-				chroma.showEffect(id);
-			});
-		});
+	var chromaInstance: ChromaInstance | undefined;
+	chroma.Instance(true).then(instance => {
+		chromaInstance = instance;
+		playVSAnim();
 	});
 
-	context.subscriptions.push(disposable);
+	var animData: VSCAnimationData = {
+		debugStatus: VSCAnimDataDebugStatus.NONE
+	};
+
+	let disposableStart = vscode.commands.registerCommand('extension.startAnimation', () => {
+		if (chromaInstance) {
+			chromaInstance.playAnimation(new WaveAnimation());
+		}
+	});
+
+	let disposableStop = vscode.commands.registerCommand('extension.stopAnimation', () => {
+		if (chromaInstance) {
+			chromaInstance.stopAnimation();
+		}
+	});
+
+	var playVSAnim = () => {
+		if (chromaInstance) {
+			chromaInstance.playAnimation(new VSCAnimation(animData));
+		}
+	};
+
+	var stopVSAnim = () => {
+		if (chromaInstance) {
+			chromaInstance.playAnimation(new VSCAnimation(animData));
+		}
+	};
+
+	context.subscriptions.push(vscode.window.onDidChangeWindowState(({focused}) => {
+		if (focused) {
+			//playVSAnim();
+		} else {
+			// stopVSAnim();
+		}
+	}));
+
+	context.subscriptions.push(vscode.debug.onDidStartDebugSession(session => {
+		animData.debugStatus = VSCAnimDataDebugStatus.ACTIVE;
+		playVSAnim();
+	}));
+	context.subscriptions.push(vscode.debug.onDidTerminateDebugSession(session => {
+		animData.debugStatus = VSCAnimDataDebugStatus.NONE;
+		playVSAnim();
+	}));
+
+	context.subscriptions.push(disposableStart, disposableStop);
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
-	console.log('VSChroma deactivate');
+
 }

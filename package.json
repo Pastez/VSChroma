@@ -10,14 +10,18 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "extension.startAnimation",
+				"title": "VSChrom: Start Animation"
+			},
+			{
+				"command": "extension.stopAnimation",
+				"title": "VSChrom: Stop Animation"
 			}
 		]
 	},
@@ -42,6 +46,7 @@
 		"vscode-test": "^1.2.0"
 	},
 	"dependencies": {
+		"isomorphic-fetch": "2.2.1",
 		"xmlhttprequest-ts": "^1.0.1"
 	}
 }
