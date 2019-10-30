@@ -1,8 +1,6 @@
-import {Animation} from "../Animation";
-import {AnimationFrame} from "../AnimationFrame";
-import {Color} from "../Color";
-import {Keyboard} from "../Devices/Keyboard";
-import Key from "../Key";
+import { Animation, Color, Key, AnimationFrame } from '@pastez/chromajs';
+import Keyboard from '@pastez/chromajs/dist/Devices/Keyboard';
+
 
 export enum VSCAnimDataDebugStatus {
     NONE,

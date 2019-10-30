@@ -1,33 +1,26 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { ChromaApp } from './chroma-js/ChromaApp';
-import DeviceContainer, { AvailableDevices } from './chroma-js/Devices';
-import { AppCategory } from './chroma-js/AppInfo';
-import { ChromaInstance } from './chroma-js/ChromaInstance';
-import { Animation } from './chroma-js/Animation';
-import { WaveAnimation } from './chroma-js/Animations/WaveAnimation';
-import Color from './chroma-js/Color';
-import Keyboard from './chroma-js/Devices/Keyboard';
-import { BcaAnimation } from './chroma-js/Animations/BcaAnimation';
-import { VSCAnimationData, VSCAnimDataDebugStatus, VSCAnimation } from './chroma-js/Animations/VSCAnimation';
+import { ChromaApp, AvailableDevices, AppCategory, ChromaInstance, WaveAnimation, AppInfo, AuthorInfo } from '@pastez/chromajs';
+import { VSCAnimationData, VSCAnimDataDebugStatus, VSCAnimation } from './VSCAnimation';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 
-	var chroma: ChromaApp = new ChromaApp(
+	var chroma: ChromaApp = new ChromaApp(new AppInfo(
 		'VSChroma',
 		'Visual Studio Code Plugin for Razer Chroma',
-		'Tomasz Pastez Kwolek',
-		'pastezzz@gmail.com',
+		new AuthorInfo("pastezzz@gmai.com", "Tomasz Kwolek"),
 		[AvailableDevices.Keyboard],
 		AppCategory.Application
-	);
+	));
 
 	var chromaInstance: ChromaInstance | undefined;
 	chroma.Instance(true).then(instance => {
-		chromaInstance = instance;
+		if(instance) {
+			chromaInstance = instance;
+		}
 		playVSAnim();
 	});
 
