@@ -21,7 +21,7 @@
 		"commands": [
 			{
 				"command": "extension.startAnimation",
-				"title": "VSChrom: Start Animation"
+				"title": "VSChrom: Start Wave Animation"
 			},
 			{
 				"command": "extension.stopAnimation",

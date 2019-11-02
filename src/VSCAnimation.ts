@@ -10,6 +10,7 @@ export enum VSCAnimDataDebugStatus {
 
 export interface VSCAnimationData {
     debugStatus: VSCAnimDataDebugStatus;
+    numOfProblems: number;
 }
 
 export class VSCAnimation extends Animation {
@@ -37,6 +38,11 @@ export class VSCAnimation extends Animation {
                     break;
                 default:
                     break;
+            }
+
+            const numOfProblems = Math.min(10, this._data.numOfProblems);
+            for (let i = 0; i < numOfProblems; i++) {
+                frame.Keyboard.setPosition(1, 2 + i, new Color('ff0000'));
             }
 
             this.Frames.push(frame);

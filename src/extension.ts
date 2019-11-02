@@ -25,7 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	var animData: VSCAnimationData = {
-		debugStatus: VSCAnimDataDebugStatus.NONE
+		debugStatus: VSCAnimDataDebugStatus.NONE,
+		numOfProblems: 0
 	};
 
 	let disposableStart = vscode.commands.registerCommand('extension.startAnimation', () => {
@@ -39,14 +40,9 @@ export function activate(context: vscode.ExtensionContext) {
 			chromaInstance.stopAnimation();
 		}
 	});
+	context.subscriptions.push(disposableStart, disposableStop);
 
-	var playVSAnim = () => {
-		if (chromaInstance) {
-			chromaInstance.playAnimation(new VSCAnimation(animData));
-		}
-	};
-
-	var stopVSAnim = () => {
+	const playVSAnim = () => {
 		if (chromaInstance) {
 			chromaInstance.playAnimation(new VSCAnimation(animData));
 		}
@@ -69,7 +65,11 @@ export function activate(context: vscode.ExtensionContext) {
 		playVSAnim();
 	}));
 
-	context.subscriptions.push(disposableStart, disposableStop);
+	context.subscriptions.push(vscode.languages.onDidChangeDiagnostics(event => {
+		animData.numOfProblems = vscode.languages.getDiagnostics().map(d => d[1].length).reduce((p, c) => p + c);
+		playVSAnim();
+	}));
+	
 }
 
 // this method is called when your extension is deactivated
