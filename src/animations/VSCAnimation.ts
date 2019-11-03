@@ -1,17 +1,6 @@
 import { Animation, Color, Key, AnimationFrame } from '@pastez/chromajs';
 import Keyboard from '@pastez/chromajs/dist/Devices/Keyboard';
-
-
-export enum VSCAnimDataDebugStatus {
-    NONE,
-    ACTIVE,
-    PAUSE
-}
-
-export interface VSCAnimationData {
-    debugStatus: VSCAnimDataDebugStatus;
-    numOfProblems: number;
-}
+import { VSCAnimationData, VSCAnimDataDebugStatus } from './VSCAnimationData';
 
 export class VSCAnimation extends Animation {
 
@@ -26,7 +15,7 @@ export class VSCAnimation extends Animation {
             const frame = new AnimationFrame();
             const prc = f / this.frameCnt;
 
-            frame.Keyboard.setAll(new Color(8, 8, 8));
+            frame.Keyboard.setAll(new Color(this._data.config.defaultColor));
             switch (this._data.debugStatus) {
                 case VSCAnimDataDebugStatus.ACTIVE:
                     frame.Keyboard.setRow(0, new Color(0, 0, 0));
@@ -43,6 +32,10 @@ export class VSCAnimation extends Animation {
             const numOfProblems = Math.min(10, this._data.numOfProblems);
             for (let i = 0; i < numOfProblems; i++) {
                 frame.Keyboard.setPosition(1, 2 + i, new Color('ff0000'));
+            }
+
+            if (this._data.openedTerminals > 0) {
+                frame.Keyboard.setKey(Key.OemTilde, new Color('ffff00'));
             }
 
             this.Frames.push(frame);

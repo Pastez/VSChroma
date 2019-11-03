@@ -18,13 +18,27 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration":[
+			{
+				"title": "VSChroma",
+				"properties": {
+					"extension.vschroma.defaultColor": {
+						"type": "string",
+						"default": "082b40",
+						"pattern": "[A-Fa-f0-9]{6}",
+						"markdownDescription": "**Default color** used to iluminate keyboard",
+						"title": "Default Color"
+					}
+				}
+			}
+		],
 		"commands": [
 			{
-				"command": "extension.startAnimation",
+				"command": "extension.vschroma.startAnimation",
 				"title": "VSChrom: Start Wave Animation"
 			},
 			{
-				"command": "extension.stopAnimation",
+				"command": "extension.vschroma.stopAnimation",
 				"title": "VSChrom: Stop Animation"
 			}
 		]
@@ -36,6 +50,7 @@
 		"pretest": "npm run compile",
 		"test": "node ./out/test/runTest.js"
 	},
+	
 	"devDependencies": {
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.6",
