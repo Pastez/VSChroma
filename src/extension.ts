@@ -32,6 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
 		config: config(),
 		debugStatus: VSCAnimDataDebugStatus.NONE,
 		diagnostics: diagnostics(),
+		tasks: vscode.tasks.taskExecutions,
 		openedTerminals: vscode.window.terminals.length
 	};
 
@@ -80,6 +81,16 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(vscode.languages.onDidChangeDiagnostics(event => {
 		animData.diagnostics = diagnostics();
+		playVSAnim();
+	}));
+
+	context.subscriptions.push(vscode.tasks.onDidStartTask(task => {
+		animData.tasks = vscode.tasks.taskExecutions;
+		playVSAnim();
+	}));
+
+	context.subscriptions.push(vscode.tasks.onDidEndTask(task => {
+		animData.tasks = vscode.tasks.taskExecutions;
 		playVSAnim();
 	}));
 

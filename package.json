@@ -33,8 +33,15 @@
 						"type": "string",
 						"default": "ffffff",
 						"pattern": "[A-Fa-f0-9]{6}",
-						"markdownDescription": "**Terminal** color of tylda key, when terminal is open",
+						"markdownDescription": "**Terminal** color of *~* key, when terminal is open",
 						"title": "Terminal Color"
+					},
+					"extension.vschroma.taskColor": {
+						"type": "string",
+						"default": "ffffff",
+						"pattern": "[A-Fa-f0-9]{6}",
+						"markdownDescription": "**Running Task** color of *ESC* key",
+						"title": "Task Color"
 					},
 					"extension.vschroma.errorColor": {
 						"type": "string",
