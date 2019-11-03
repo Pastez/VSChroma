@@ -9,6 +9,6 @@ export enum VSCAnimDataDebugStatus {
 export interface VSCAnimationData {
     config: vscode.WorkspaceConfiguration;
     debugStatus: VSCAnimDataDebugStatus;
-    numOfProblems: number;
+    diagnostics: vscode.Diagnostic[];
     openedTerminals: number;
 }

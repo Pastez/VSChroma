@@ -27,10 +27,11 @@ export function activate(context: vscode.ExtensionContext) {
 	connect();
 
 	const config = () => { return vscode.workspace.getConfiguration('extension.vschroma'); };
+	const diagnostics = () => { return vscode.languages.getDiagnostics().map(v => v[1]).flat(); };
 	const animData: VSCAnimationData = {
 		config: config(),
 		debugStatus: VSCAnimDataDebugStatus.NONE,
-		numOfProblems: 0,
+		diagnostics: diagnostics(),
 		openedTerminals: vscode.window.terminals.length
 	};
 
@@ -78,7 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
 	}));
 
 	context.subscriptions.push(vscode.languages.onDidChangeDiagnostics(event => {
-		animData.numOfProblems = vscode.languages.getDiagnostics().map(d => d[1].length).reduce((p, c) => p + c);
+		animData.diagnostics = diagnostics();
 		playVSAnim();
 	}));
 

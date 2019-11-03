@@ -1,6 +1,7 @@
 import { Animation, Color, Key, AnimationFrame } from '@pastez/chromajs';
 import Keyboard from '@pastez/chromajs/dist/Devices/Keyboard';
 import { VSCAnimationData, VSCAnimDataDebugStatus } from './VSCAnimationData';
+import { DiagnosticSeverity } from 'vscode';
 
 export class VSCAnimation extends Animation {
 
@@ -29,13 +30,17 @@ export class VSCAnimation extends Animation {
                     break;
             }
 
-            const numOfProblems = Math.min(10, this._data.numOfProblems);
-            for (let i = 0; i < numOfProblems; i++) {
-                frame.Keyboard.setPosition(1, 2 + i, new Color('ff0000'));
-            }
+            const colorWarning = new Color(this._data.config.warningColor);
+            const colorError = new Color(this._data.config.errorColor);
+            this._data.diagnostics.forEach((v, i) => {
+                if (i <= 10) {
+                    frame.Keyboard.setPosition(1, i + 2, v.severity === DiagnosticSeverity.Error ? colorError : colorWarning);
+                }
+            });
 
+            const colorTerminal = new Color(this._data.config.terminalColor);
             if (this._data.openedTerminals > 0) {
-                frame.Keyboard.setKey(Key.OemTilde, new Color('ffff00'));
+                frame.Keyboard.setKey(Key.OemTilde, colorTerminal);
             }
 
             this.Frames.push(frame);

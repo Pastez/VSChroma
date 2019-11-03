@@ -24,10 +24,31 @@
 				"properties": {
 					"extension.vschroma.defaultColor": {
 						"type": "string",
-						"default": "082b40",
+						"default": "04101a",
 						"pattern": "[A-Fa-f0-9]{6}",
 						"markdownDescription": "**Default color** used to iluminate keyboard",
 						"title": "Default Color"
+					},
+					"extension.vschroma.terminalColor": {
+						"type": "string",
+						"default": "ffffff",
+						"pattern": "[A-Fa-f0-9]{6}",
+						"markdownDescription": "**Terminal** color of tylda key, when terminal is open",
+						"title": "Terminal Color"
+					},
+					"extension.vschroma.errorColor": {
+						"type": "string",
+						"default": "ff0000",
+						"pattern": "[A-Fa-f0-9]{6}",
+						"markdownDescription": "**Error** color",
+						"title": "Error Color"
+					},
+					"extension.vschroma.warningColor": {
+						"type": "string",
+						"default": "ffbb00",
+						"pattern": "[A-Fa-f0-9]{6}",
+						"markdownDescription": "**Warning** color",
+						"title": "Warning Color"
 					}
 				}
 			}
