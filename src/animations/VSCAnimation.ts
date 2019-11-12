@@ -15,7 +15,6 @@ export class VSCAnimation extends Animation {
             const frame = new AnimationFrame();
             const prc = f / this.frameCnt;
             const prcEase = (Math.sin(prc * 2 * Math.PI) + 1) / 2;
-            console.log(prcEase);
             frame.Keyboard.setAll(new Color(this._data.config.defaultColor));
             switch (this._data.debugStatus) {
                 case VSCAnimDataDebugStatus.ACTIVE:
@@ -40,9 +39,6 @@ export class VSCAnimation extends Animation {
 
             if (this._data.tasks.length > 0) {
                 const colorTask = new Color(this._data.config.taskColor);
-                colorTask.r = (colorTask.r as number) * prcEase;
-                colorTask.g = (colorTask.g as number) * prcEase;
-                colorTask.b = (colorTask.b as number) * prcEase;
                 frame.Keyboard.setKey(Key.Escape, colorTask);
             }
 
