@@ -1,65 +1,37 @@
-# vschroma README
+# VSChroma
 
-This is the README for your extension "vschroma". After writing up a brief description, we recommend including the following sections.
+This extension will control colors of your **Razer Chroma Keyboard** depending of what you're doing in VSCode.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- option to set keyboard color when you're using Visual Studio Code
+- displays errors and warrnings count on number row of your keyboard
+- displaying "knight rider" animation when debugging :D
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+- **Razer Synapse** >= 3.4.1024
+- **Chroma Connect Module**. 
+- Currently only tested on Windows.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+This is first version of first extension I made so be prepared and warn :D
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
+### 0.0.1
 
 Initial release of ...
 
-### 1.0.1
+## License
 
-Fixed issue #.
+### Extension using [my fork](https://github.com/Pastez/chroma-js) of Razer Chroma.js plugin. License below:
 
-### 1.1.0
+Copyright (c) 2017 Chroma Developer Community (https://github.com/chroma-sdk).
 
-Added features X, Y, and Z.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
------------------------------------------------------------------------------------------------------------
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
