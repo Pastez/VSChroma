@@ -1,7 +1,12 @@
 {
 	"name": "vschroma",
 	"displayName": "VSChroma",
-	"description": "",
+	"publisher": "pastez",
+	"description": "VSCode extension that control colors of your Razer Chroma Keyboard",
+	"icon": "images/icon.png",
+	"galleryBanner": {
+		"theme": "dark"
+	},
 	"version": "0.0.1",
 	"license": "MIT",
 	"repository": {
