@@ -27,7 +27,11 @@ export function activate(context: vscode.ExtensionContext) {
 	connect();
 
 	const config = () => { return vscode.workspace.getConfiguration('extension.vschroma'); };
-	const diagnostics = () => { return vscode.languages.getDiagnostics().map(v => v[1]).flat(); };
+	const diagnostics = () => {
+		return vscode.languages.getDiagnostics()
+			.map(v => v[1])
+			.flat();
+	};
 	const animData: VSCAnimationData = {
 		config: config(),
 		debugStatus: VSCAnimDataDebugStatus.NONE,
@@ -55,58 +59,44 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	};
 
-	context.subscriptions.push(vscode.window.onDidChangeWindowState(({focused}) => {
-		if (focused) {
-			//playVSAnim();
-		} else {
-			// stopVSAnim();
-		}
-	}));
-
-	context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
-		if (e.affectsConfiguration('extension.vschroma')) {
-			animData.config = config();
+	context.subscriptions.push(
+		vscode.workspace.onDidChangeConfiguration(e => {
+			if (e.affectsConfiguration('extension.vschroma')) {
+				animData.config = config();
+				playVSAnim();
+			}
+		}),
+		vscode.debug.onDidStartDebugSession(session => {
+			animData.debugStatus = VSCAnimDataDebugStatus.ACTIVE;
 			playVSAnim();
-		}
-	}));
-
-	context.subscriptions.push(vscode.debug.onDidStartDebugSession(session => {
-		animData.debugStatus = VSCAnimDataDebugStatus.ACTIVE;
-		playVSAnim();
-	}));
-	context.subscriptions.push(vscode.debug.onDidTerminateDebugSession(session => {
-		animData.debugStatus = VSCAnimDataDebugStatus.NONE;
-		playVSAnim();
-	}));
-
-	context.subscriptions.push(vscode.languages.onDidChangeDiagnostics(event => {
-		animData.diagnostics = diagnostics();
-		playVSAnim();
-	}));
-
-	context.subscriptions.push(vscode.tasks.onDidStartTask(task => {
-		animData.tasks = vscode.tasks.taskExecutions;
-		playVSAnim();
-	}));
-
-	context.subscriptions.push(vscode.tasks.onDidEndTask(task => {
-		animData.tasks = vscode.tasks.taskExecutions;
-		playVSAnim();
-	}));
-
-	context.subscriptions.push(vscode.window.onDidOpenTerminal(terminal => {
-		animData.openedTerminals = vscode.window.terminals.length;
-		playVSAnim();
-	}));
-
-	context.subscriptions.push(vscode.window.onDidCloseTerminal(terminal => {
-		animData.openedTerminals = vscode.window.terminals.length;
-		playVSAnim();
-	}));
-	
+		}),
+		vscode.debug.onDidTerminateDebugSession(session => {
+			animData.debugStatus = VSCAnimDataDebugStatus.NONE;
+			playVSAnim();
+		}),
+		vscode.languages.onDidChangeDiagnostics(event => {
+			animData.diagnostics = diagnostics();
+			playVSAnim();
+		}),
+		vscode.tasks.onDidStartTask(task => {
+			animData.tasks = vscode.tasks.taskExecutions;
+			playVSAnim();
+		}),
+		vscode.tasks.onDidEndTask(task => {
+			animData.tasks = vscode.tasks.taskExecutions;
+			playVSAnim();
+		}),
+		vscode.window.onDidOpenTerminal(terminal => {
+			animData.openedTerminals = vscode.window.terminals.length;
+			playVSAnim();
+		}),
+		vscode.window.onDidCloseTerminal(terminal => {
+			animData.openedTerminals = vscode.window.terminals.length;
+			playVSAnim();
+		})
+	);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {
-
+	
 }

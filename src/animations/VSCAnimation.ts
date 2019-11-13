@@ -31,7 +31,7 @@ export class VSCAnimation extends Animation {
 
             const colorWarning = new Color(this._data.config.warningColor);
             const colorError = new Color(this._data.config.errorColor);
-            this._data.diagnostics.forEach((v, i) => {
+            this._data.diagnostics.filter(d => d.severity <= DiagnosticSeverity.Warning).forEach((v, i) => {
                 if (i <= 10) {
                     frame.Keyboard.setPosition(1, i + 2, v.severity === DiagnosticSeverity.Error ? colorError : colorWarning);
                 }

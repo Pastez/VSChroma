@@ -7,6 +7,7 @@ This extension will control colors of your **Razer Chroma Keyboard** depending o
 - option to set keyboard color when you're using Visual Studio Code
 - displays errors and warrnings count on number row of your keyboard
 - displaying "knight rider" animation when debugging :D
+- when at least one terminal is open *tilda* key will change color
 
 ## Requirements
 
@@ -16,13 +17,7 @@ This extension will control colors of your **Razer Chroma Keyboard** depending o
 
 ## Known Issues
 
-This is first version of first extension I made so be prepared and warn :D
-
-## Release Notes
-
-### 0.0.1
-
-Initial release of ...
+This is "first" version of first extension I made so be prepared and warn :D
 
 ## License
 
