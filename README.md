@@ -1,4 +1,6 @@
-# VSChroma
+![Chroma](images/web/icon_16x16.png)
+**VSChroma**
+___
 
 This extension will control colors of your **Razer Chroma Keyboard** depending of what you're doing in VSCode.
 
@@ -14,6 +16,8 @@ This extension will control colors of your **Razer Chroma Keyboard** depending o
 - **Razer Synapse** >= 3.4.1024
 - **Chroma Connect Module**. 
 - Currently only tested on Windows.
+
+## [Changelog](CHANGELOG.md)
 
 ## Known Issues
 
