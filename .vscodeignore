@@ -10,3 +10,4 @@ vsc-extension-quickstart.md
 **/*.ts
 images/*.psd
 images/web
+_config.yml
