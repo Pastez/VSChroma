@@ -1,5 +1,5 @@
 ![Chroma](images/web/icon_16x16.png)
-**VSChroma**
+[**VSChroma**](https://marketplace.visualstudio.com/items?itemName=pastez.vschroma)
 ___
 
 This extension will control colors of your **Razer Chroma Keyboard** depending of what you're doing in VSCode.
