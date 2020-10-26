@@ -16,12 +16,13 @@ This extension will control colors of your **Razer Chroma Keyboard** depending o
 - **Razer Synapse** >= 3.4.1024
 - **Chroma Connect Module**. 
 - Currently only tested on Windows.
+- Also works without synapse and chroma connect on non razer devices [via aurora](https://www.project-aurora.com)
 
 ## [Changelog](CHANGELOG.md)
 
 ## Known Issues
 
-This is "first" version of first extension I made so be prepared and warn :D
+This is "first" version of my first extention so be prepared :D
 
 ## License
 
